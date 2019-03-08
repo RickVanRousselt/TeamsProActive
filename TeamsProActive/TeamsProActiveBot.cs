@@ -1,11 +1,13 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Bot.Builder;
 using Microsoft.Bot.Schema;
 using Microsoft.Extensions.Logging;
+using TeamsProActive.Engine;
 
 namespace TeamsProActive
 {
@@ -25,13 +27,15 @@ namespace TeamsProActive
         private readonly TeamsProActiveAccessors _accessors;
         private readonly ILogger _logger;
 
+        private readonly IProactiveMessageManager proactiveMessageManager;
+
         /// <summary>
         /// Initializes a new instance of the class.
         /// </summary>
         /// <param name="accessors">A class containing <see cref="IStatePropertyAccessor{T}"/> used to manage state.</param>
         /// <param name="loggerFactory">A <see cref="ILoggerFactory"/> that is hooked to the Azure App Service provider.</param>
         /// <seealso cref="https://docs.microsoft.com/en-us/aspnet/core/fundamentals/logging/?view=aspnetcore-2.1#windows-eventlog-provider"/>
-        public TeamsProActiveBot(TeamsProActiveAccessors accessors, ILoggerFactory loggerFactory)
+        public TeamsProActiveBot(TeamsProActiveAccessors accessors, ILoggerFactory loggerFactory, IProactiveMessageManager proactiveMessageManager)
         {
             if (loggerFactory == null)
             {
@@ -41,6 +45,7 @@ namespace TeamsProActive
             _logger = loggerFactory.CreateLogger<TeamsProActiveBot>();
             _logger.LogTrace("Turn start.");
             _accessors = accessors ?? throw new System.ArgumentNullException(nameof(accessors));
+            this.proactiveMessageManager = proactiveMessageManager;
         }
 
         /// <summary>
@@ -63,6 +68,13 @@ namespace TeamsProActive
             // see https://aka.ms/about-bot-activity-message to learn more about the message and other activity types
             if (turnContext.Activity.Type == ActivityTypes.Message)
             {
+                if (turnContext.Activity.Text == "test")
+                {
+                    this.proactiveMessageManager.QueueWorkItem(turnContext, "Reminding you about test", TimeSpan.FromSeconds(10));
+                }
+
+
+
                 // Get the conversation state from the turn context.
                 var state = await _accessors.CounterState.GetAsync(turnContext, () => new CounterState());
 

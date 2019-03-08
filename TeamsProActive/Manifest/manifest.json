@@ -1,0 +1,46 @@
+{
+  "$schema": "https://statics.teams.microsoft.com/sdk/v1.0/manifest/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.0",
+  "id": "4fecd017-631d-4545-a4bb-d034b47e06b8",
+  "version": "0.0.1",
+  "packageName": "TeamsProActive",
+  "developer": {
+    "name": "Rick Van Rousselt",
+    "websiteUrl": "https://www.rickvanrousselt.com",
+    "privacyUrl": "https://www.rickvanrousselt.com",
+    "termsOfUseUrl": "https://www.rickvanrousselt.com"
+  },
+  "name": {
+    "short": "TeamsProActive",
+    "full": "Teams Pro Active Test Bot"
+  },
+  "description": {
+    "short": "Teams Pro Active Test Bot",
+    "full": "Bot to test the Teams Pro Active Functionality"
+  },
+  "icons": {
+    "outline": "bot-icon-20x20.png",
+    "color": "bot-icon-96x96.png"
+  },
+  "accentColor": "#FFFFFF",
+  "bots": [
+    {
+      "botId": "b21e5d09-6521-4dc2-9595-915f023a01aa",
+      "isNotificationOnly": false,
+      "scopes": [
+        "team",
+        "personal"
+      ]
+    }
+  ],
+  "permissions": [
+    "identity",
+    "messageTeamMembers"
+  ],
+  "validDomains": [
+    "*.taburl.com",
+    "*.azurewebsites.net",
+    "*.linkedin.com"
+  ]
+}
+

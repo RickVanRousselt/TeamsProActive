@@ -3,6 +3,8 @@
 This bot is a simple bot that accepts input from the user and echoes it back.
 This bot has been created using [Microsoft Bot Framework][1], 
 
+//ngrok http 3978 -host-header="localhost:3978"
+
 # Prerequisites
 - [Visual Studio 2017 15.7][2] or newer installed.
 - [.Net Core 2.1][3] or higher installed.  

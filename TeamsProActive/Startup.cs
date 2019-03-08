@@ -14,6 +14,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using TeamsProActive.Engine;
 
 namespace TeamsProActive
 {
@@ -54,6 +55,8 @@ namespace TeamsProActive
         /// <seealso cref="https://docs.microsoft.com/en-us/azure/bot-service/bot-service-manage-channels?view=azure-bot-service-4.0"/>
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddTransient<IProactiveMessageManager, ProactiveMessageManager>();
+
             services.AddBot<TeamsProActiveBot>(options =>
            {
                var secretKey = Configuration.GetSection("botFileSecret")?.Value;
